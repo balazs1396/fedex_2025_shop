@@ -1,6 +1,8 @@
 import 'package:fedex_2025_shop/models/product.dart';
 import 'package:fedex_2025_shop/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:fedex_2025_shop/models/shop.dart';
 
 class MyProductTile extends StatelessWidget {
   const MyProductTile({super.key, required this.product});
@@ -21,6 +23,8 @@ class MyProductTile extends StatelessWidget {
           MaterialButton(
             onPressed: () {
               Navigator.pop(context);
+
+              context.read<Shop>().addToCart(item: product);
             },
             child: const Text("Yes"),
           ),

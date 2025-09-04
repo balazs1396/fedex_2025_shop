@@ -1,10 +1,17 @@
 import 'package:fedex_2025_shop/app_container.dart';
 import 'package:fedex_2025_shop/cart.dart';
+import 'package:fedex_2025_shop/models/shop.dart';
 import 'package:fedex_2025_shop/shop.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => Shop())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
