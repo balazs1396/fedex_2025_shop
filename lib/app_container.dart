@@ -12,7 +12,7 @@ class AppContainer extends StatefulWidget {
 class _AppContainerState extends State<AppContainer> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     ShopScreen(),
     CartScreen(),
   ];
@@ -34,7 +34,6 @@ class _AppContainerState extends State<AppContainer> {
             icon: Icon(Icons.shopping_cart),
             label: 'Cart',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Carts'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
