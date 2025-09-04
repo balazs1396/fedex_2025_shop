@@ -1,3 +1,4 @@
+import 'package:fedex_2025_shop/cart.dart';
 import 'package:fedex_2025_shop/shop.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       home: ShopScreen(),
       routes: {
         ShopScreen.route: (context) => ShopScreen(),
+        CartScreen.route: (context) => CartScreen(),
       },
     );
   }
