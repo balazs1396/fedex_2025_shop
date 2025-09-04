@@ -38,11 +38,8 @@ class CartScreen extends StatelessWidget {
   void onPay(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => const AlertDialog(
-        content: Text(
-          "Thanks for your order",
-        ),
-      ),
+      builder: (context) =>
+          const AlertDialog(content: Text("Thanks for your order")),
     );
   }
 
@@ -77,7 +74,56 @@ class CartScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final item = cart[index];
 
-                      return ListTile(
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                child: Image.asset(
+                                  fit: BoxFit.fitWidth,
+                                  item.imagePath,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 6,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Flexible(
+                                        child: Text(
+                                          item.name,
+                                          overflow: TextOverflow
+                                              .ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '\€ ${item.price.toStringAsFixed(2)}',
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Spacer(),
+                            // Icon(Icons.remove),
+                          ],
+                        ),
+                      );
+
+                      /*return ListTile(
+  
                         title: Text(item.name),
                         subtitle: Text(item.price.toStringAsFixed(2)),
                         trailing: IconButton(
@@ -86,7 +132,7 @@ class CartScreen extends StatelessWidget {
                             removeItemFromCart(context: context, product: item);
                           },
                         ),
-                      );
+                      );*/
                     },
                   ),
           ),
@@ -95,13 +141,14 @@ class CartScreen extends StatelessWidget {
             child: Container(
               color: Colors.orange[300],
               width: 500,
-              
+
               child: IconButton(
-              onPressed: () {
-                onPay(context);
-              },
-              icon: Icon(Icons.payment),
-            )),
+                onPressed: () {
+                  onPay(context);
+                },
+                icon: Icon(Icons.payment),
+              ),
+            ),
           ),
         ],
       ),
