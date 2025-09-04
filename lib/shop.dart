@@ -9,16 +9,7 @@ class ShopScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fedex days 2025 - Shop'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, CartScreen.route);
-            },
-            icon: const Icon(Icons.shopping_cart),
-          ),
-        ],
-      ),
+        title: const Text('Fedex days 2025 - Shop'),),
       body: Center(child: const Text('This is the shop')),
     );
   }
