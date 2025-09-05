@@ -11,28 +11,11 @@ class CartScreen extends StatelessWidget {
     required BuildContext context,
     required Product product,
   }) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: const Text("Remove this item to cart ?"),
-        actions: [
-          MaterialButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text("Cancel"),
-          ),
-          MaterialButton(
-            onPressed: () {
-              Navigator.pop(context);
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('${product.name} dismissed')));
 
-              context.read<Shop>().removeFromCart(item: product);
-            },
-            child: const Text("Yes"),
-          ),
-        ],
-      ),
-    );
+    context.read<Shop>().removeFromCart(item: product);
   }
 
   void onPay(BuildContext context) {
@@ -74,65 +57,57 @@ class CartScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final item = cart[index];
 
-                      return Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                child: Image.asset(
-                                  fit: BoxFit.fitWidth,
-                                  item.imagePath,
+                      return Dismissible(
+                        key: Key(item.imagePath),
+                        background: Container(color: Colors.red[700]),
+                        onDismissed: (DismissDirection direction) {
+                          removeItemFromCart(context: context, product: item);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  child: Image.asset(
+                                    fit: BoxFit.fitWidth,
+                                    item.imagePath,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 6,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Flexible(
-                                        child: Text(
-                                          item.name,
-                                          overflow: TextOverflow
-                                              .ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
+                              Expanded(
+                                flex: 6,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            item.name,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        '\€ ${item.price.toStringAsFixed(2)}',
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '\€ ${item.price.toStringAsFixed(2)}',
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            // Spacer(),
-                            // Icon(Icons.remove),
-                          ],
+                            ],
+                          ),
                         ),
                       );
-
-                      /*return ListTile(
-  
-                        title: Text(item.name),
-                        subtitle: Text(item.price.toStringAsFixed(2)),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.remove),
-                          onPressed: () {
-                            removeItemFromCart(context: context, product: item);
-                          },
-                        ),
-                      );*/
                     },
                   ),
           ),
