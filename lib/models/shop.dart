@@ -4,23 +4,27 @@ import 'package:flutter/material.dart';
 
 class Shop extends ChangeNotifier {
 
-  //user cart
   List<Product> _cart = [];
+  bool _darkTheme = false;
 
-//get products list
   List<Product> get shop => products;
-//get user cart
+
   List<Product> get cart => _cart;
 
-// add item to cart
+  bool get darkTheme => _darkTheme;
+
   void addToCart({required Product item}) {
     _cart.add(item);
     notifyListeners();
   }
 
-// remove  item from cart
   void removeFromCart({required Product item}) {
     _cart.remove(item);
+    notifyListeners();
+  }
+
+  void setTheme(bool theme) {
+    _darkTheme = theme;
     notifyListeners();
   }
 }

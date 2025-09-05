@@ -1,4 +1,5 @@
 import 'package:fedex_2025_shop/cart.dart';
+import 'package:fedex_2025_shop/settings.dart';
 import 'package:fedex_2025_shop/shop.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class _AppContainerState extends State<AppContainer> {
   static final List<Widget> _widgetOptions = <Widget>[
     ShopScreen(),
     CartScreen(),
+    SettingsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -33,6 +35,10 @@ class _AppContainerState extends State<AppContainer> {
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
         currentIndex: _selectedIndex,
